@@ -3,20 +3,25 @@
   "version": "1.0.0",
   "description": "Simple example of an app created using ReactJs",
   "scripts": {
-    "build": "tsc -p src/",
+    "typings": "typings install react react-dom",
+    "build": "tsc -p src/ | node ./node_modules/webpack/bin/webpack.js",
     "serve": "lite-server -c=bs-config.json",
     "prestart": "npm run build",
-    "start": "concurrently \"npm run build:watch\" \"npm run serve\""
+    "start": "npm run build | npm run serve"
   },
   "keywords": ["reactjs"],
   "author": "Samuel Hutama",
   "license": "MIT",
   "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   },
   "devDependencies": {
-    "concurrently": "^3.4.0",
     "lite-server": "^2.3.0",
     "typescript": "^2.2.1",
-    "typescript-compiler": "^1.4.1-2"
+    "typescript-compiler": "^1.4.1-2",
+    "typings": "^2.1.0",
+    "ts-loader": "^2.0.1",
+    "webpack": "^2.2.1"
   }
 }
