@@ -1,0 +1,22 @@
+{
+  "name": "reactjs-simpleexample",
+  "version": "1.0.0",
+  "description": "Simple example of an app created using ReactJs",
+  "scripts": {
+    "build": "tsc -p src/",
+    "serve": "lite-server -c=bs-config.json",
+    "prestart": "npm run build",
+    "start": "concurrently \"npm run build:watch\" \"npm run serve\""
+  },
+  "keywords": ["reactjs"],
+  "author": "Samuel Hutama",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "concurrently": "^3.4.0",
+    "lite-server": "^2.3.0",
+    "typescript": "^2.2.1",
+    "typescript-compiler": "^1.4.1-2"
+  }
+}
