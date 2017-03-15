@@ -7,6 +7,7 @@
     "build": "tsc -p src/ | node ./node_modules/webpack/bin/webpack.js",
     "serve": "lite-server -c=bs-config.json",
     "prestart": "npm run build",
+    "postinstall": "npm run typings",
     "start": "npm run build | npm run serve"
   },
   "keywords": ["reactjs"],
