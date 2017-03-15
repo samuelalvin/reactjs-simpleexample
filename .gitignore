@@ -1,6 +1,6 @@
 /node_modules
 /npm-debug.log
 /typings
-!bundle.js
+!webpack.config.js
 *.js
 *.js.map
