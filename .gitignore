@@ -2,5 +2,6 @@
 /npm-debug.log
 /typings
 !webpack.config.js
+typings.json
 *.js
 *.js.map
