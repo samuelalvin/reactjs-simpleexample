@@ -7,7 +7,8 @@ import { UserRow } from "../userRow";
 interface UserTableProps { }
 
 interface UserTableState {
-    users: IUser[];
+    users?: IUser[];
+    newUser?: IUser;
 }
 
 export class UserTable extends React.Component<UserTableProps, UserTableState> {
@@ -17,12 +18,20 @@ export class UserTable extends React.Component<UserTableProps, UserTableState> {
         super(props);
 
         this.deleteUser = this.deleteUser.bind(this);
+        this.editUser = this.editUser.bind(this);
+        this.addUser = this.addUser.bind(this);
+        this.onNewUserInformationChanges = this.onNewUserInformationChanges.bind(this);
         this.state = {
-            users: mockUsers
+            users: mockUsers,
+            newUser: {
+                id: 0,
+                name: "",
+                age: 0
+            } as IUser
         };
     };
 
-    deleteUser(key: number) {
+    private deleteUser(key: number): void {
         let userIndex = this.state.users.findIndex(user => user.id === key);
         let updatedUsers = this.state.users;
         updatedUsers.splice(userIndex, 1);
@@ -31,9 +40,49 @@ export class UserTable extends React.Component<UserTableProps, UserTableState> {
         });
     }
 
-    getUserRows(): void {
+    private editUser(updatedUser: IUser): void {
+        let updatedUsers = this.state.users;
+        let updatedUserIndex = updatedUsers.findIndex(user => user.id == updatedUser.id);
+        updatedUsers.splice(updatedUserIndex, 1, updatedUser);
+        this.setState({
+            users: updatedUsers
+        });
+    }
+
+    private addUser(): void {
+        let isIdValid = this.state.newUser.id > 0 && this.state.users.find(user => user.id == this.state.newUser.id) === undefined;
+        let isNameValid = this.state.newUser.name.length > 0;
+        let isAgeValid = this.state.newUser.age > 0;
+        if (isIdValid === false || isNameValid === false || isAgeValid === false) {
+            alert("New User information is invalid");
+            return;
+        }
+
+        let newUser = this.state.newUser;
+        let updatedUsers = this.state.users;
+        updatedUsers.push(newUser);
+        this.setState({
+            users: updatedUsers,
+            newUser: {
+                id: 0,
+                name: "",
+                age: 0
+            } as IUser
+        });
+    }
+
+    private onNewUserInformationChanges(event: React.FormEvent): void {
+        const target = event.target as React.HTMLAttributes;
+        let newUser = this.state.newUser;
+        newUser[target.name] = target.value;
+        this.setState({
+            newUser: newUser 
+        });
+    }
+
+    private getUserRows(): void {
         this.userRows = this.state.users.map(mockUser => {
-            return (<UserRow user={mockUser} onUserDeletion={this.deleteUser} key={mockUser.id} />);
+            return (<UserRow user={mockUser} onUserDeletion={this.deleteUser} onUserEdit={this.editUser} key={mockUser.id} />);
         })
     }
 
@@ -51,7 +100,21 @@ export class UserTable extends React.Component<UserTableProps, UserTableState> {
                     </tr>
                 </thead>
                 <tbody>
-                    { this.userRows }
+                    {this.userRows}
+                    <tr>
+                        <td>
+                            <input name="id" type="number" value={this.state.newUser.id.toString()} onChange={this.onNewUserInformationChanges} />
+                        </td>
+                        <td>
+                            <input name="name" type="text" value={this.state.newUser.name} onChange={this.onNewUserInformationChanges} />
+                        </td>
+                        <td>
+                            <input name="age" type="number" value={this.state.newUser.age.toString()} onChange={this.onNewUserInformationChanges} />
+                        </td>
+                        <td>
+                            <button onClick={this.addUser}>Add a User</button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         );

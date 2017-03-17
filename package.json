@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Simple example of an app created using ReactJs",
   "scripts": {
-    "typings": "typings install react react-dom | typings install dt~es6-shim --save --global",
+    "typings": "typings install react react-dom && typings install dt~core-js --save --global",
     "build": "tsc -p src/ | node ./node_modules/webpack/bin/webpack.js",
     "serve": "lite-server -c=bs-config.json",
     "prestart": "npm run build",

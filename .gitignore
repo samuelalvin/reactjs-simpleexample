@@ -1,6 +1,7 @@
 /node_modules
 /npm-debug.log
 /typings
+/.vs
 !webpack.config.js
 typings.json
 *.js
