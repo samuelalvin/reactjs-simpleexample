@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { IUser } from "../../../data/user/interface";
+import { IUser } from "../../../interface/user";
 
 interface UserRowProps {
     user: IUser;
