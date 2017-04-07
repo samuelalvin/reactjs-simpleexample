@@ -1,2 +1,2 @@
-# reactjs-simpleexample
-Simple example of an app created using ReactJs
+# Create a simple CRUD app using ReactJs
+Work is in progress..

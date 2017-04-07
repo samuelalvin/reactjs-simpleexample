@@ -3,6 +3,7 @@
 /typings
 /.vs
 !webpack.config.js
+README.md
 typings.json
 *.js
 *.js.map
