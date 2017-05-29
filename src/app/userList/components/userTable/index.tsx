@@ -14,7 +14,6 @@ interface UserTableProps {
 interface UserTableState { }
 
 export class UserTable extends React.Component<UserTableProps, UserTableState> {
-    private userRows: JSX.Element[];
     private startTime = 0;
     private endTime = 0;
 
@@ -34,14 +33,12 @@ export class UserTable extends React.Component<UserTableProps, UserTableState> {
     }
 
     private getUserRows(): void {
-        this.userRows = this.props.users.map(mockUser => {
+        return this.props.users.map(mockUser => {
             return (<UserRow user={mockUser} key={mockUser.id} />);
         })
     }
 
     render(): JSX.Element {
-        this.getUserRows();
-
         return (
             <table>
                 <thead>
@@ -58,7 +55,7 @@ export class UserTable extends React.Component<UserTableProps, UserTableState> {
                             <button type="button" onClick={this.handleUserClearance}>Clear sample users</button>
                         </td>
                     </tr>
-                    {this.userRows}
+                    {this.getUserRows()}
                 </tbody>
             </table>
         );
