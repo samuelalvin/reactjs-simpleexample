@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { IUser } from "../../../interface/user";
-import { mockUsers } from "../../../mockData/user";
 import { UserRow } from "./components/userRow";
 
 interface UserTableProps {
