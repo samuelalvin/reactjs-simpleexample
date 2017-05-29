@@ -4,11 +4,14 @@ import { IUser } from "../../../interface/user";
 import { mockUsers } from "../../../mockData/user";
 import { UserRow } from "./components/userRow";
 
-interface UserTableProps { }
-
-interface UserTableState {
+interface UserTableProps {
     users: IUser[];
+
+    onUserAddition(): void;
+    onUserClearance(): void;
 }
+
+interface UserTableState { }
 
 export class UserTable extends React.Component<UserTableProps, UserTableState> {
     private userRows: JSX.Element[];
@@ -17,35 +20,21 @@ export class UserTable extends React.Component<UserTableProps, UserTableState> {
 
     constructor(props) {
         super(props);
-        this.addUsers = this.addUsers.bind(this);
-        this.clearUsers = this.clearUsers.bind(this);
-        this.state = {
-            users: []
-        };
+
+        this.handleUserAddition = this.handleUserAddition.bind(this);
+        this.handleUserClearance = this.handleUserClearance.bind(this);
     }
 
-    componentDidUpdate() {
-        this.endTime = performance.now();
-        let timeSpent = this.endTime - this.startTime; 
-        console.debug(timeSpent + " ms.");
+    private handleUserAddition(): void {
+        this.props.onUserAddition();
     }
 
-    private addUsers(): void {
-        this.startTime = performance.now();
-        this.setState({
-            users: mockUsers
-        });
-    }
-
-    private clearUsers(): void {
-        this.startTime = performance.now();
-        this.setState({
-            users: []
-        });
+    private handleUserClearance(): void {
+        this.props.onUserClearance();
     }
 
     private getUserRows(): void {
-        this.userRows = this.state.users.map(mockUser => {
+        this.userRows = this.props.users.map(mockUser => {
             return (<UserRow user={mockUser} key={mockUser.id} />);
         })
     }
@@ -65,8 +54,8 @@ export class UserTable extends React.Component<UserTableProps, UserTableState> {
                 <tbody>
                     <tr>
                         <td colSpan={3}>
-                            <button type="button" onClick={this.addUsers}>Add sample users</button>
-                            <button type="button" onClick={this.clearUsers}>Clear sample users</button>
+                            <button type="button" onClick={this.handleUserAddition}>Add sample users</button>
+                            <button type="button" onClick={this.handleUserClearance}>Clear sample users</button>
                         </td>
                     </tr>
                     {this.userRows}
