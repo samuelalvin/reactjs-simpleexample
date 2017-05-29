@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { mockUsers } from "../mockData/user";
 import { UserTable } from "./components/userTable";
 
 interface UserListProps { }
