@@ -32,7 +32,7 @@ export class UserTable extends React.Component<UserTableProps, UserTableState> {
         this.props.onUserClearance();
     }
 
-    private getUserRows(): void {
+    private getUserRows(): JSX.Element[] {
         return this.props.users.map(mockUser => {
             return (<UserRow user={mockUser} key={mockUser.id} />);
         })
