@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { IUser } from "../interface/user";
 import { mockUsers } from "../mockData/user";
 import { UserTable } from "./components/userTable";
 
@@ -17,9 +18,9 @@ export class UserList extends React.Component<UserListProps, UserListState> {
         super(props);
         this.addUsers = this.addUsers.bind(this);
         this.clearUsers = this.clearUsers.bind(this);
-        this.setState({
+        this.state = {
             users: []
-        });
+        };
     }
 
     componentDidUpdate() {
